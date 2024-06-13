@@ -44,6 +44,7 @@
 
 ## 시연 동영상
 
-https://github.com/hacomarch/RandomWriting/assets/64404604/468eae99-6493-4b8c-8549-898728c232b7
+https://github.com/hacomarch/RandomWriting/assets/64404604/03874891-5256-48c0-9ad3-40087480b9d0
+
 
 
