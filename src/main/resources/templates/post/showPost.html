@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script>
+        var emotion = [[${emotionCnt}]];
+        var alert;
+        if(emotion > 5){
+            alert = confirm('부정적인 글이 많아졌어요.\n기분이 좋아지는 컨텐츠를 추천받으시겠어요?');
+
+            if(alert == true){
+                location.href='https://www.youtube.com/results?search_query=힐링';
+            }
+            else if(alert == false){
+                location.href='/postList';
+            }
+        }
+
+    </script>
+    <title>쓴 글 보기</title>
+</head>
+<body>
+<h1>쓴 글 보기</h1>
+
+    제목 | <span th:text="${post.title}"></span><br>
+    내용 | <span th:text="${post.content}"></span><br>
+    작성자 | <span th:text="${nickname}"></span><br>
+    작성일 | <span th:text="${#temporals.format(post.created, 'yyyy-MM-dd')}"></span><br>
+    공개 여부 | <span th:text="${isOpen}"></span><br>
+
+<br>
+<div th:if="${myPost}">
+    <button type="button" th:onclick="|location.href='@{/editPost/{postId}(postId=${post.id})}'|">수정</button>
+    <button type="button" th:onclick="|javascript:reallyDelete('@{/deletePost/{postId}(postId=${post.id})}')|">삭제</button>
+</div>
+
+<div th:if="${!myPost}">
+    <br>
+    <div th:if="${!isLikeOk}">
+        <button type="button" th:onclick="|location.href='@{/like/{postId}(postId=${post.id})}'|">
+            <img class="HeartImg" th:src="|/img/blankHeart.png|" style="width:30px; height:30px;">
+        </button>
+    </div>
+
+    <div th:if="${isLikeOk}">
+        <button type="button" th:onclick="|location.href='@{/likeCancel/{postId}/{likeId}(postId=${post.id}, likeId=${likeId})}'|">
+            <img class="HeartImg" th:src="|/img/fullHeart.png|" style="width:30px; height:30px;">
+        </button>
+    </div>
+</div>
+
+<br>
+<button type="button" th:onclick="|location.href='@{/}'|">메인으로</button>
+<button type="button" th:onclick="|location.href='@{/postList}'|">목록</button>
+
+<script th:inline="javascript">
+    function reallyDelete(url){
+        var isDelete = confirm('정말로 삭제하시겠습니까?');
+
+        if(isDelete == true)
+            location.href=url;
+        else if(isDelete == false)
+            history.back();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script th:inline="javascript">
+    function reallyDelete(url){
+        var isDelete = confirm('정말로 탈퇴하시겠습니까?');
+
+        if(isDelete == true)
+            location.href=url;
+        else if(isDelete == false)
+            history.back();
+    }
+    </script>
+    <title>내 정보</title>
+</head>
+<body>
+<div>
+    <div style="float:left; width:33%;">
+        <h2>내 정보</h2>
+        <form th:action="@{/update/member}" th:object="${member}" method="post">
+            <input type="hidden" th:field="*{id}">
+            이름 <input type="text" th:field="*{name}" required> <br><br>
+            아이디 <input type="text" th:field="*{userid}" readonly> <br><br>
+            비밀번호 <input type="password" th:field="*{password}" required> <br><br>
+            닉네임 <input type="text" th:field="*{nickname}" required><br><br>
+            주소 <input type="text" th:field="*{tel}" required> <br><br>
+            전화번호 <input type="text" th:field="*{address}" required> <br><br>
+            <input type="submit" value="수정">
+            <button type="button" th:onclick="|javascript:reallyDelete('@{/quit/{id}(id=${member.getId()})}')|">회원 탈퇴</button>
+            <br><br>
+            <button type="button" th:onclick="|location.href='@{/}'|">메인으로</button>
+        </form>
+    </div>
+
+    <div style="float:left; width:33%;">
+        <h2>내가 작성한 글</h2>
+        <table style="border: 1px solid black;
+                      padding: 8px;">
+            <thead>
+            <tr>
+
+                <td align="center">번호</td>
+                <td align="center">제목</td>
+                <td align="center">작성일</td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="post : ${postList}">
+                <td align="center"><span th:text="${postStat.count}"></span></td>
+                <td align="center"><a th:href="@{/postList/{postId}(postId=${post.id})}"><span th:text="${post.title}"></span></a></td>
+                <td align="center"> <span th:text="${#temporals.format(post.created, 'yyyy-MM-dd')}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="float:left; width:33%;">
+        <h2>내가 좋아요한 글</h2>
+        <table style="border : 1px solid black;
+                      padding: 8px;">
+            <thead>
+            <tr>
+
+                <td align="center">번호</td>
+                <td align="center">제목</td>
+                <td align="center">작성자</td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="post : ${likeList}">
+                <td align="center"><span th:text="${postStat.count}"></span></td>
+                <td align="center"><a th:href="@{/postList/{postId}(postId=${post.id})}"><span th:text="${post.title}"></span></a></td>
+                <td align="center"> <span th:text="${post.getMember().getNickname()}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
+

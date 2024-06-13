@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        #errorMessage{
+            color : red;
+        }
+    </style>
+    <title>회원가입</title>
+</head>
+<body>
+<h1>회원가입</h1>
+
+<form th:action="@{/signup}" th:object="${newMember}" method="post">
+    <input type="hidden" th:field="*{emotionCnt}" th:value="0">
+    이름 <input type="text" th:field="*{name}" required> <br><br>
+
+    아이디 <input type="text" th:field="*{userid}" required> <br><br>
+
+    비밀번호 <input type="password" th:field="*{password}" id="userPwd" required> <br><br>
+    비밀번호 확인 <input type="password" id="checkPwd" required> <button type="button" onclick="checkOnPwd()">확인</button> <br><br>
+
+    닉네임 <input type="text" th:field="*{nickname}" required>
+    <div th:if="${#fields.hasGlobalErrors()}">
+        <p th:each="err : ${#fields.globalErrors()}" th:text="${err}" id="errorMessage">오류 메시지</p>
+    </div>
+    <br><br>
+    주소 <input type="text" th:field="*{tel}" placeholder="강원도 춘천시" required> <br><br>
+
+    전화번호 <input type="text" th:field="*{address}" placeholder="010-0000-0000" required> <br><br>
+
+    <input type="submit" value="가입하기">
+</form>
+
+<script>
+    function checkOnPwd() {
+        var userPwd = document.getElementById('userPwd').value;
+        var checkPwd = document.getElementById('checkPwd').value;
+
+        if(userPwd.length < 7){
+            alert('7자 이상 입력해주세요.');
+        }
+        else{
+            if(userPwd != checkPwd){
+                alert('비밀번호가 일치하지 않습니다.');
+            }
+            else {
+                alert('비밀번호가 일치합니다.');
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

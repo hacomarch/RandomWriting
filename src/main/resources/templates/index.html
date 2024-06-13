@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Random Writing</title>
+</head>
+
+<body>
+<div class="header">
+    <div class="menu">
+        <button type="button" th:onclick="|location.href='@{/postList}'|"><img id="menuBtn" th:src="|/img/menu.png|"></button>
+    </div>
+    <div class="menu" th:if="${loginMember == null}">
+        <button type="button" th:onclick="|location.href='@{/login}'|" >로그인</button>
+    </div>
+
+    <div class="menu" th:if="${loginMember != null}">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">로그아웃</button>
+        </form>
+        <button type="button" th:onclick="|location.href='@{/info/{id}(id=${loginMember.getId()})}'|">내 정보</button>
+    </div>
+    <div id="title"><img id="titleImg" th:src="|/img/title.png|"></div>
+</div>
+
+<div class="main">
+    <span th:text="${randomTitle}"></span>
+    <button type="button" th:onclick="|location.href='@{/post/{title}(title=${randomTitle})}'|">확인</button>
+</div>
+<hr>
+<div class="reload"><img onclick="window.location.reload()" id="reloadImg" th:src="|/img/reload.png|"></div>
+
+</body>
+</html>

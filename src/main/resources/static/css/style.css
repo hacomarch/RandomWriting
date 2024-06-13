@@ -1,0 +1,116 @@
+@charset "utf-8";
+
+@font-face{
+    font-family: 'nanum';
+    src: url('nanumfont.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'miwon';
+    src: url('miwon.ttf') format('truetype');
+}
+
+body{
+    font-family:'nanum';
+    height: 98vh;
+    width: 99vw;
+    background-image: url('../img/background.jpg');
+    background-repeat : no-repeat;
+    background-size : cover;
+    text-align: center;
+}
+
+table {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+table, td{
+    border-collapse : collapse;
+    border : 1px solid black;
+    padding: 6px;
+}
+
+.header{
+    overflow: hidden;
+    margin-bottom: 250px;
+}
+
+.menu{
+    float:left;
+    margin: 0 3px;
+    padding: 10px;
+}
+
+.menu button{
+    margin-top:8px;
+    font-size:1.7em;
+    font-family:'miwon';
+    color: #04420B;
+    border:none;
+    background: none;
+    cursor:pointer;
+}
+
+#errorMessage{
+    color : red;
+}
+
+#menuBtn{
+    width: 50px;
+    height: 50px;
+}
+#title{
+    float:right;
+}
+#titleImg{
+    width: 400px;
+    height: 100px;
+}
+
+.main{
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.main span{
+    font-size:4em;
+    color: #04420B;
+    margin-right:4%;
+}
+
+.main button{
+    font-size:2.3em;
+    font-family:'nanum';
+    color: #04420B;
+    border:none;
+    background: none;
+    cursor:pointer;
+}
+
+hr{
+    margin-top:20px;
+    border:2px solid;
+    color: #04420B;
+    width: 70%;
+}
+
+.reload{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top:25px;
+    cursor:pointer;
+}
+
+#reloadImg{
+    width: 50px;
+    height: 50px;
+}
+
+.HeartImg{
+    width: 50px;
+    height: 50px;
+}
